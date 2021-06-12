@@ -1,32 +1,4 @@
-" Environment {
-
-" Identify platform {
-silent function! OSX()
-return has('macunix')
-        endfunction
-        silent function! LINUX()
-        return has('unix') && !has('macunix') && !has('win32unix')
-    endfunction
-    silent function! WINDOWS()
-    return  (has('win32') || has('win64'))
-endfunction
-" }
-
-" Basics {
 set nocompatible        " Must be first line
-lang en_US.UTF-8
-if !WINDOWS()
-    set shell=/bin/bash
-endif
-
-if exists('+termguicolors')
-    set termguicolors
-endif
-" }
-
-" }
-
-" Use plug config {
 
 let g:pldaily_plug_groups = [
             \   'general',
@@ -49,67 +21,20 @@ let g:coc_global_extensions = [
 
 call plug#begin('~/.vim/plugged')
 
-" General {
 if count(g:pldaily_plug_groups, 'general')
     Plug 'arcticicestudio/nord-vim'
     Plug 'morhetz/gruvbox'
     Plug 'vim-airline/vim-airline'
-    Plug 'mbbill/undotree'
-    Plug 'scrooloose/nerdcommenter'
-    Plug 'tpope/vim-repeat'
-    Plug 'psliwka/vim-smoothie'
-    Plug 'mg979/vim-visual-multi'
-    Plug 'itchyny/calendar.vim'
-    Plug 'dhruvasagar/vim-zoom'
-    Plug 'kristijanhusak/defx-icons'
-    Plug 'christoomey/vim-tmux-navigator'
-    Plug 'roxma/nvim-yarp'
-    " Plug 'tpope/vim-surround'
-    " Plug 'Yggdroot/indentLine'
-    " Plug 'matze/vim-move'
-    " Plug 'mhinz/vim-startify'
-    if has('nvim')
-        Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-        Plug 'Shougo/defx.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-
+    Plug 'preservim/nerdtree'
 endif
-" }
 
-" Markdown {
-if count(g:pldaily_plug_groups, 'markdown')
-    Plug 'hotoo/pangu.vim'
-    Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-endif
-" }
-
-" JavaScript {
 if count(g:pldaily_plug_groups, 'javascript')
     Plug 'leafgarland/typescript-vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'pangloss/vim-javascript'
     Plug 'mxw/vim-jsx'
     Plug 'peitalin/vim-jsx-typescript'
-    " Plug 'posva/vim-vue', { 'for': 'vue' }
-    " Plug 'elzr/vim-json'
 endif
-" }
-
-" GoLang {
-if count(g:pldaily_plug_groups, 'golang')
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-endif
-" }
-
-" Clojure {
-if count(g:pldaily_plug_groups, 'clojure')
-    Plug 'guns/vim-sexp',    {'for': 'clojure'}
-    Plug 'liquidz/vim-iced', {'for': 'clojure'}
-endif
-" }
 
 call plug#end()
 
@@ -165,14 +90,6 @@ set expandtab                   " Tabs are spaces, not tabs
 set tabstop=2                   " An indentation every 2 columns
 set softtabstop=2               " Let backspace delete indent
 set splitright                  " Puts new vsplit windows to the right of the current
-set splitbelow                  " Puts new split windows to the bottom of the current
-
-autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact syntax=typescriptreact
-autocmd BufNewFile,BufRead *.jsx set filetype=javascriptreact syntax=javascriptreact
-autocmd BufNewFile,BufRead *.mdx set filetype=mdx syntax=markdown
-autocmd FileType go,vim,java setlocal tabstop=4 shiftwidth=4 softtabstop=4
-
-" }
 
 " Key (re)Mappings {
 
@@ -181,22 +98,6 @@ let mapleader = ' '
 
 " The default local leader is ','
 let maplocalleader = ','
-
-" editing the configuration
-let s:pldaily_edit_config_mapping = '<leader>ev'
-
-" editing and applying the pldaily configuration
-let s:pldaily_apply_config_mapping = '<leader>sv'
-
-" Easier moving in tabs and windows
-nmap <C-J> <C-W>j
-nmap <C-K> <C-W>k
-nmap <C-L> <C-W>l
-nmap <C-H> <C-W>h
-
-" Switch next buffer
-nmap [b :bp<CR>
-nmap ]b :bn<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 noremap j gj
@@ -223,11 +124,6 @@ map <Leader>= <C-w>=
 noremap H ^
 noremap L $
 
-" change root dir
-nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" }
-
 " Plugins {
 
 " Nord {
@@ -236,69 +132,6 @@ if isdirectory(expand("~/.vim/plugged/nord-vim"))
     " colorscheme nord
     let g:gitgutter_override_sign_column_highlight = 1
     colorscheme gruvbox
-endif
-" }
-
-" Defx {
-if isdirectory(expand("~/.vim/plugged/defx.nvim"))
-    let g:defx_icons_enable_syntax_highlight = 1
-    let g:defx_icons_column_length = 1
-    call defx#custom#option('_', {
-                \ 'columns': 'space:indent:icons:filename:type',
-                \ 'winwidth': 30,
-                \ 'split': 'vertical',
-                \ 'direction': 'rightbelow',
-                \ 'ignored_files': '*.swp,.git,.svn,.DS_Store',
-                \ 'show_ignored_files': 0,
-                \ 'toggle': 1,
-                \ 'resume': 1
-                \ })
-
-    nnoremap <silent> <C-e>
-                \ :<C-u>Defx -buffer-name=tab`tabpagenr()` `getcwd()`<CR>
-    nnoremap <silent> <localleader>e
-                \ :<C-u>Defx -buffer-name=tab`tabpagenr()` -search=`expand('%:p')` `getcwd()`<CR>
-
-    function! s:defx_mappings() abort
-        nnoremap <silent><buffer><expr> o
-                    \ defx#is_directory() ?
-                    \ defx#do_action('open_tree') :
-                    \ defx#do_action('drop')
-
-        nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
-        nnoremap <silent><buffer><expr> s defx#do_action('drop', 'vsplit')
-        nnoremap <silent><buffer><expr> i defx#do_action('drop', 'split')
-        nnoremap <silent><buffer><expr> I defx#do_action('toggle_ignored_files')
-        nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-        nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
-        nnoremap <silent><buffer><expr> C defx#do_action('cd', defx#get_candidate().action__path)
-        nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
-        nnoremap <silent><buffer><expr> > defx#do_action('resize', defx#get_context().winwidth - 10)
-        nnoremap <silent><buffer><expr> < defx#do_action('resize', defx#get_context().winwidth + 10)
-        nnoremap <silent><buffer><expr> md defx#do_action('remove')
-        nnoremap <silent><buffer><expr> mm defx#do_action('rename')
-        nnoremap <silent><buffer><expr> ma defx#do_action('new_file')
-        nnoremap <silent><buffer><expr> mr defx#do_action('execute_command', 'open .')
-        nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
-    endfunction
-
-    " https://github.com/Shougo/defx.nvim/issues/175
-    function! s:open_defx_if_directory()
-        try
-            let l:full_path = expand(expand('%:p'))
-        catch
-            return
-        endtry
-
-        if isdirectory(l:full_path)
-            execute "Defx -split=no -search=`expand('%:p')` | bd " . expand('%:r')
-        endif
-    endfunction
-
-    autocmd FileType defx setlocal nonumber
-    autocmd FileType defx setlocal norelativenumber
-    autocmd FileType defx call s:defx_mappings()
-    autocmd BufEnter * call s:open_defx_if_directory()
 endif
 " }
 
@@ -462,14 +295,6 @@ if isdirectory(expand("~/.vim/plugged/coc.nvim"))
 endif
 " }
 
-" Nerdcommenter {
-if isdirectory(expand("~/.vim/plugged/nerdcommenter"))
-    " Add spaces after comment delimiters by default
-    let g:NERDSpaceDelims = 1
-endif
-" }
-
-
 " Airline {
 if isdirectory(expand("~/.vim/plugged/vim-airline"))
     let g:airline_powerline_fonts = 0
@@ -478,114 +303,4 @@ if isdirectory(expand("~/.vim/plugged/vim-airline"))
     let g:airline_section_x = ''
     let g:airline_section_y = airline#section#create_right(['filetype'])
 endif
-" }
-
-" UndoTree {
-if isdirectory(expand("~/.vim/plugged/undotree"))
-    if has("persistent_undo")
-        set undodir=$HOME/.vimundo
-        set undofile                " So is persistent undo ...
-        set undolevels=1000         " Maximum number of changes that can be undone
-        set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-    endif
-    nnoremap <Leader>u :UndotreeToggle<CR>
-    let g:undotree_SetFocusWhenToggle = 1
-endif
-" }
-
-" Go {
-if isdirectory(expand("~/.vim/plugged/vim-go"))
-    " build       compile packages and dependencies
-    " install     compile and install packages and dependencies
-    au FileType go nmap <leader>gi <Plug>(go-install)
-    au FileType go nmap <leader>gr <Plug>(go-run)
-endif
-" }
-
-" Pangu {
-if isdirectory(expand("~/.vim/plugged/pangu.vim"))
-    " autocmd BufWritePre *.markdown,*.md,*.text,*.txt,*.wiki,*.cnx call PanGuSpacing()
-    nnoremap <Leader>pg :Pangu<CR>
-endif
-" }
-
-" MarkdownPreview {
-if isdirectory(expand("~/.vim/plugged/markdown-preview.nvim"))
-    let g:mkdp_open_to_the_world = 1
-    nnoremap <Leader>mp :MarkdownPreview<CR>
-endif
-" }
-
-" IndentLine {
-if isdirectory(expand("~/.vim/plugged/indentLine"))
-    let g:vim_json_syntax_conceal = 0
-    let g:indentLine_fileTypeExclude = ['calendar', 'defx', 'startify']
-    let g:indentLine_bufTypeExclude = ['help', 'terminal']
-endif
-" }
-
-" Vue {
-if isdirectory(expand("~/.vim/plugged/vim-vue"))
-    " vue NERDCommenter config
-    let g:ft = ''
-    function! NERDCommenter_before()
-        if &ft == 'vue'
-            let g:ft = 'vue'
-            let stack = synstack(line('.'), col('.'))
-            if len(stack) > 0
-                let syn = synIDattr((stack)[0], 'name')
-                if len(syn) > 0
-                    exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
-                endif
-            endif
-        endif
-    endfunction
-    function! NERDCommenter_after()
-        if g:ft == 'vue'
-            setf vue
-            let g:ft = ''
-        endif
-    endfunction
-endif
-" }
-
-" Calendar {
-if isdirectory(expand("~/.vim/plugged/calendar.vim"))
-    let g:calendar_task_delete = 1
-    nnoremap :Ca :Calendar<CR>
-endif
-" }
-
-" Zoom {
-if isdirectory(expand("~/.vim/plugged/vim-zoom"))
-    nmap <Leader>z <C-w>m
-endif
-" }
-
-" Startify {
-if isdirectory(expand("~/.vim/plugged/vim-startify"))
-    let g:startify_lists = [
-                \ { 'type': 'dir', 'header': ['   MRU '. getcwd()] },
-                \ ]
-    let g:startify_enable_special = 0
-    let g:startify_change_to_vcs_root = 1
-    let g:startify_custom_footer = ['   Powered by PLDaily']
-endif
-" }
-
-" }
-
-" Functions {
-
-function! s:ExpandFilenameAndExecute(command, file)
-    execute a:command . " " . expand(a:file, ":p")
-endfunction
-
-function! s:EditPldailyConfig()
-    call <SID>ExpandFilenameAndExecute("tabedit", "~/.vimrc")
-endfunction
-
-execute "noremap " . s:pldaily_edit_config_mapping " :call <SID>EditPldailyConfig()<CR>"
-execute "noremap " . s:pldaily_apply_config_mapping . " :source ~/.vim/.vimrc<CR>"
-
 " }
