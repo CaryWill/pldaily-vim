@@ -1,6 +1,6 @@
 set nocompatible        " Must be first line
 
-let g:pldaily_plug_groups = [
+let g:cary_plugin_groups = [
       \   'general',
       \   'markdown',
       \   'javascript'
@@ -21,16 +21,14 @@ let g:coc_global_extensions = [
 
 call plug#begin('~/.vim/plugged')
 
-if count(g:pldaily_plug_groups, 'general')
+if count(g:cary_plugin_groups, 'general')
   Plug 'vim-airline/vim-airline'
-
   Plug 'preservim/nerdtree'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-commentary'
-
 endif
 
-if count(g:pldaily_plug_groups, 'javascript')
+if count(g:cary_plugin_groups, 'javascript')
   Plug 'leafgarland/typescript-vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'pangloss/vim-javascript'
@@ -40,12 +38,6 @@ endif
 
 
 call plug#end()
-
-" }
-
-" General {
-
-"set background=dark         " Assume a dark background
 
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
@@ -64,9 +56,7 @@ set history=1000                    " Store a ton of history (default is 20)
 set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
 
-" }
-
-" Vim UI {
+" Vim UI
 
 set guifont=MesloLGLNerdFontComplete-Regular:h15
 
@@ -79,12 +69,8 @@ set scrolloff=3                 " scroll when 3 line
 set cursorline                  " Highlight current line
 set number                      " Line numbers on
 set ignorecase                  " Case insensitive search
-set smartcase                   " Case sensitive when uc present
 
-" }
-
-" Formatting {
-
+" Formatting 
 set wrap                        " Do wrap long lines
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=2                " Use indents of 2 spaces
@@ -93,41 +79,14 @@ set tabstop=2                   " An indentation every 2 columns
 set softtabstop=2               " Let backspace delete indent
 set splitright                  " Puts new vsplit windows to the right of the current
 
-" Key (re)Mappings {
 
-" The default leader is ' '
 let mapleader = ' '
-
-" The default local leader is ','
 let maplocalleader = ','
-
-" Wrapped lines goes down/up to next row, rather than next line in file.
-noremap j gj
-noremap k gk
-noremap J gj
-noremap K gk
-
-nnoremap Y y$
-
-" remove search highlight
-nmap <silent> <leader>/ :nohlsearch<CR>
 
 " Find merge conflict markers
 map <leader>fc /\v^[<\|=>]{7}( .*\|$)<CR>
 
-" Visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
-" Adjust viewports to the same size
-map <Leader>= <C-w>=
-
-" quick jump line begin and end
-noremap H ^
-noremap L $
-
-" Plugins {
-
+" Plugins
 " Coc.nvim {
 if isdirectory(expand("~/.vim/plugged/coc.nvim"))
   " TextEdit might fail if hidden is not set.
@@ -286,7 +245,6 @@ if isdirectory(expand("~/.vim/plugged/coc.nvim"))
   " Highlight the symbol and its references when holding the cursor.
   autocmd CursorHold * silent call CocActionAsync('highlight')
 endif
-" }
 
 " Airline {
 if isdirectory(expand("~/.vim/plugged/vim-airline"))
@@ -298,11 +256,12 @@ if isdirectory(expand("~/.vim/plugged/vim-airline"))
   let g:airline_section_x = ''
   let g:airline_section_y = airline#section#create_right(['filetype'])
 endif
-" }
+
 "file explor like vscode ctrl+p
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 
+"comment & uncomment mutiple lines
 noremap <leader>/ :Commentary<cr>
