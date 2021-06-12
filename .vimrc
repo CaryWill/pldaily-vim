@@ -26,6 +26,7 @@ if count(g:pldaily_plug_groups, 'general')
 
   Plug 'preservim/nerdtree'
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'tpope/vim-commentary'
 
 endif
 
@@ -303,3 +304,5 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
+noremap <leader>/ :Commentary<cr>
