@@ -29,6 +29,7 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'tpope/vim-commentary'
   Plug 'psliwka/vim-smoothie'
   Plug 'morhetz/gruvbox'
+  Plug 'tpope/vim-fugitive'
 endif
 
 if count(g:cary_plugin_groups, 'javascript')
@@ -70,6 +71,7 @@ set scrolloff=3                 " scroll when 3 line
 set cursorline                  " Highlight current line
 set number                      " Line numbers on
 set ignorecase                  " Case insensitive search
+set smartcase                   " Case censitive when uppercase present
 
 " Formatting 
 set wrap                        " Do wrap long lines
