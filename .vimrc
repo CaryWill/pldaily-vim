@@ -1,4 +1,5 @@
 set nocompatible        " Must be first line
+set encoding=utf-8
 
 let g:cary_plugin_groups = [
       \   'general',
@@ -27,6 +28,7 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-commentary'
   Plug 'psliwka/vim-smoothie'
+  Plug 'morhetz/gruvbox'
 endif
 
 if count(g:cary_plugin_groups, 'javascript')
@@ -58,8 +60,6 @@ set nospell                         " Spell checking off
 set hidden                          " Allow buffer switching without saving
 
 " Vim UI
-
-set guifont=MonoLisa-Black:h15
 
 set guioptions-=r               " remove right-hand scroll bar
 set guioptions-=l               " remove left-hand scroll bar
@@ -249,11 +249,15 @@ endif
 
 " Airline {
 if isdirectory(expand("~/.vim/plugged/vim-airline"))
-  let g:airline_powerline_fonts = 0
+  let g:airline_powerline_fonts = 1
   let g:airline#extensions#tmuxline#enabled = 0
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#coc#enabled = 1
   let g:airline#extensions#hunks#coc_git = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline_statusline_ontop=1
+  let g:airline#extensions#tabline#left_alt_sep = '|'
   let g:airline_section_x = ''
   let g:airline_section_y = airline#section#create_right(['filetype'])
 endif
@@ -266,3 +270,13 @@ let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|sv
 
 "comment & uncomment mutiple lines
 noremap <leader>/ :Commentary<cr>
+
+"theme
+set background=dark
+colorscheme gruvbox
+
+"nerdtree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
