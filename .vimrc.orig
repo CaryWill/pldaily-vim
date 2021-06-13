@@ -29,7 +29,10 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'tpope/vim-commentary'
   Plug 'psliwka/vim-smoothie'
   Plug 'morhetz/gruvbox'
+<<<<<<< HEAD
   Plug 'tpope/vim-fugitive'
+=======
+>>>>>>> 749e46d690135e3227c2213b406aec29086cf08c
 endif
 
 if count(g:cary_plugin_groups, 'javascript')
@@ -81,9 +84,6 @@ set expandtab                   " Tabs are spaces, not tabs
 set tabstop=2                   " An indentation every 2 columns
 set softtabstop=2               " Let backspace delete indent
 set splitright                  " Puts new vsplit windows to the right of the current
-
-" Others
-set foldmethod=manual " use zf command to fold/unfold code block
 
 
 let mapleader = ' '
