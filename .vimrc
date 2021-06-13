@@ -26,6 +26,7 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'preservim/nerdtree'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-commentary'
+  Plug 'psliwka/vim-smoothie'
 endif
 
 if count(g:cary_plugin_groups, 'javascript')
@@ -58,7 +59,7 @@ set hidden                          " Allow buffer switching without saving
 
 " Vim UI
 
-set guifont=MesloLGLNerdFontComplete-Regular:h15
+set guifont=MonoLisa-Black:h15
 
 set guioptions-=r               " remove right-hand scroll bar
 set guioptions-=l               " remove left-hand scroll bar
