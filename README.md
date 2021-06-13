@@ -1,6 +1,6 @@
 ## My Vim Config
 
-![](https://raw.githubusercontent.com/PLDaily/pldaily-vim/master/screenshot.jpg)
+![](https://github.com/CaryWill/pldaily-vim/blob/master/screenshot.png?raw=true)
 
 ### 安装配置
 
