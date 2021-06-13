@@ -7,7 +7,7 @@
 > 克隆项目
 
 ```shell
-git clone https://github.com/PLDaily/pldaily-vim.git ~/.vim
+git clone https://github.com/CaryWill/pldaily-vim.git ~/.vim
 ```
 
 > 执行 shell
