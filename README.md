@@ -32,8 +32,4 @@ cd ~/.vim && sh bootstrap.sh
 
 ### 编辑配置文件
 
-`<Leader>ev`  打开配置文件
-
-`<Leader>sv`  执行配置文件
-
 `:PlugInstall` 安装配置
