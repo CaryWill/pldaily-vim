@@ -32,6 +32,7 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/fzf.vim' "search
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "search
+  Plug 'Raimondi/delimitMate'
 endif
 
 if count(g:cary_plugin_groups, 'javascript')
