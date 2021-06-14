@@ -30,6 +30,8 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'psliwka/vim-smoothie'
   Plug 'morhetz/gruvbox'
   Plug 'tpope/vim-fugitive'
+  Plug 'junegunn/fzf.vim' "search
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } "search
 endif
 
 if count(g:cary_plugin_groups, 'javascript')
