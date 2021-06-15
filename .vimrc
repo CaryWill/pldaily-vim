@@ -27,7 +27,7 @@ if count(g:cary_plugin_groups, 'general')
   Plug 'preservim/nerdtree'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'tpope/vim-commentary'
-  Plug 'psliwka/vim-smoothie'
+  " Plug 'psliwka/vim-smoothie'
   Plug 'morhetz/gruvbox'
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/fzf.vim' "search
